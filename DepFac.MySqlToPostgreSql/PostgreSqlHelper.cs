@@ -12,7 +12,7 @@ namespace DepFac.MySqlToPostgreSql
 
 		private const string ColumnNamesQuery = @"SELECT tables.table_name,
 				                                         columns.column_name,
-				                                         columns.data_type,
+				                                         CASE WHEN columns.data_type = 'USER-DEFINED' THEN columns.udt_name ELSE columns.data_type END,,
 				                                         columns.is_nullable,
 				                                         COALESCE(columns.character_maximum_length, columns.numeric_precision, columns.datetime_precision),
 				                                         columns.ordinal_position
@@ -61,6 +61,7 @@ namespace DepFac.MySqlToPostgreSql
 					return typeof(long);
 				case "bytea":
 					return typeof(byte[]);
+				case "citext":
 				case "text":
 				case "character varying":
 				case "character":
