@@ -12,7 +12,7 @@ namespace DepFac.MySqlToPostgreSql
 
 		private const string ColumnNamesQuery = @"SELECT tables.table_name,
 				                                         columns.column_name,
-				                                         CASE WHEN columns.data_type = 'USER-DEFINED' THEN columns.udt_name ELSE columns.data_type END,,
+				                                         CASE WHEN columns.data_type = 'USER-DEFINED' THEN columns.udt_name ELSE columns.data_type END,
 				                                         columns.is_nullable,
 				                                         COALESCE(columns.character_maximum_length, columns.numeric_precision, columns.datetime_precision),
 				                                         columns.ordinal_position
